@@ -1,0 +1,29 @@
+import { describe, it, expect } from "vitest";
+import { add } from "./script";
+
+describe("add function", () => {
+  it("should exist", () => {
+    expect(add).toBeDefined();
+    expect(typeof add).toBe("function");
+  });
+
+  it("should return 0 if the query parameter is not a string", () => {
+    expect(add(123)).toBe(0);
+    expect(add({})).toBe(0);
+    expect(add([])).toBe(0);
+    expect(add(null)).toBe(0);
+    expect(add(undefined)).toBe(0);
+    expect(add(true)).toBe(0);
+  });
+
+  it("should return 0 if the query parameter is an empty string", () => {
+    expect(add("")).toBe(0);
+  });
+
+  it("should return the sum of comma-separated numbers in a string", () => {
+    expect(add("1")).toBe(1);
+    expect(add("1,5")).toBe(6);
+    expect(add("1,2,3,4")).toBe(10);
+    expect(add("1,2,3,4,5")).toBe(15);
+  });
+});
