@@ -26,4 +26,16 @@ describe("add function", () => {
     expect(add("1,2,3,4")).toBe(10);
     expect(add("1,2,3,4,5")).toBe(15);
   });
+
+  it("should return the sum of numbers separated by new lines", () => {
+    expect(add("1\n2\n3")).toBe(6);
+    expect(add("1\n2\n3\n4")).toBe(10);
+    expect(add("1\n2\n3\n4\n5")).toBe(15);
+  });
+
+  it("should handle mixed separators (commas and new lines)", () => {
+    expect(add("1\n2,3")).toBe(6);
+    expect(add("1,2\n3\n4")).toBe(10);
+    expect(add("10\n20,30")).toBe(60);
+  });
 });
