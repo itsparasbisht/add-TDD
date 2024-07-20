@@ -38,4 +38,12 @@ describe("add function", () => {
     expect(add("1,2\n3\n4")).toBe(10);
     expect(add("10\n20,30")).toBe(60);
   });
+
+  it("should handle custom delimiters", () => {
+    expect(add("//:\n1:2")).toBe(3); // delimiter :
+    expect(add("//-\n1-2-3")).toBe(6); // delimiter -
+    expect(add("//%\n1%2%3%4")).toBe(10); // delimiter %
+    expect(add("//@\n1@2@3@4@5")).toBe(15); // delimiter @
+    expect(add("//--\n1--2--3--4--5")).toBe(15); // delimiter --
+  });
 });
