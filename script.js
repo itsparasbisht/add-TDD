@@ -11,14 +11,24 @@ export function add(query) {
     numbersString = query.substring(delimiterEndIndex + 1);
   }
 
-  // replace new lines with commas
+  // replace new lines with delimiter characters
   const formattedQuery = numbersString.replace(/\n/g, delimiter);
 
-  const numbers = formattedQuery.split(delimiter).map((num) => parseInt(num));
+  const numbers = formattedQuery
+    .split(delimiter)
+    .map((number) => parseInt(number))
+    .filter((number) => !isNaN(number));
+
+  // Check for negative numbers
+  const negativeNumbers = numbers.filter((number) => number < 0);
+  console.log(negativeNumbers);
+  if (negativeNumbers.length > 0) {
+    throw new Error(
+      `negative numbers not allowed ${negativeNumbers.join(", ")}`
+    );
+  }
 
   const sum = numbers.reduce((acc, curr) => acc + curr, 0);
 
   return sum;
 }
-
-console.log(add("pojpjo"));

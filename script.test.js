@@ -46,4 +46,15 @@ describe("add function", () => {
     expect(add("//@\n1@2@3@4@5")).toBe(15); // delimiter @
     expect(add("//--\n1--2--3--4--5")).toBe(15); // delimiter --
   });
+
+  it("should throw an exception for negative numbers", () => {
+    expect(() => add("1,-2,3")).toThrow("negative numbers not allowed -2");
+    expect(() => add("-1,-2,-3")).toThrow(
+      "negative numbers not allowed -1, -2, -3"
+    );
+    expect(() => add("1,2\n-3,4")).toThrow("negative numbers not allowed -3");
+    expect(() => add("//@\n1@-2@3@4@-5")).toThrow(
+      "negative numbers not allowed -2, -5"
+    );
+  });
 });
