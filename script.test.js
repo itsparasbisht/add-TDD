@@ -57,4 +57,12 @@ describe("add function", () => {
       "negative numbers not allowed -2, -5"
     );
   });
+
+  it("should ignore numbers greater than 1000", () => {
+    expect(add("2,1000")).toBe(1002);
+    expect(add("2,1001")).toBe(2);
+    expect(add("1001,1002,1003")).toBe(0);
+    expect(add("2\n1001\n3")).toBe(5);
+    expect(add("//:\n2:1001:3")).toBe(5);
+  });
 });
